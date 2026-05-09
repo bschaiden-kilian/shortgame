@@ -1,0 +1,17 @@
+[
+    {
+        "name":"Tee-Drill Lagputting",
+        "description":  "Per Round, you have three Balls and need to putt them within the front of the hole or 10% Past (1 foot for a 10 Foot Putt). Per Ball: If you’re in the zone you get one point and if you hole it you get two points. Get as many points as possible in 10 Rounds.",
+        "scoring-system": "points"
+    },
+    {
+        "name":"Up & Down Drawback",
+        "description":  "You play nine holes. Per hole, you drop  a ball from off the green and chip it at a pin. If your ball is on the green, you pull it back one putter length and putt from there until it's in the hole.",
+        "scoring-system": "score"
+    },
+    {
+        "name":"Up & Down Drawback",
+        "description":  "You play nine holes. Per hole, you drop  a ball from off the green and chip it at a pin. If your ball is on the green, you pull it back one putter length and putt from there until it's in the hole.",
+        "scoring-system": "score"
+    }
+]
