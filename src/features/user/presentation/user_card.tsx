@@ -1,5 +1,5 @@
 import Card from '../../../common/components/Card';
-import { Body1, Body2 } from '../../../common/components/Text';
+import { Body1} from '../../../common/components/Text';
 import type User from '../data/user_model';
 
 interface IUserCardProps {
