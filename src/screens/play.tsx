@@ -6,7 +6,7 @@ import { ServiceContext } from '../common/context/ServiceContext';
 import { useParams } from 'react-router-dom';
 import GameSession from '../features/game_session/data/game_session_model';
 
-const Game = () => {
+const Play = () => {
     const { sessionId } = useParams()
     const service = useContext(ServiceContext);
     const [currentRound, setCurrentRound] = useState(1);
@@ -65,7 +65,7 @@ const Game = () => {
     console.log("Render. currentPlayer:", currentPlayer, "session.id:", session.id);
     console.log("User lookup for", currentPlayer, ":", service?.userService.getUserById(session.playerIds[currentPlayer]));
     return (
-        <div className='h-full flex flex-col gap-10'>
+        <div className='h-full flex flex-col gap-5'>
             <div className='w-full h-fit flex gap-1 items-end justify-between'>
                 <div className='w-full h-fit flex gap-1 items-end'>
                     <div className='flex flex-col gap-1.5'>
@@ -106,4 +106,4 @@ const Game = () => {
     )
 }
 
-export default Game; 
+export default Play; 

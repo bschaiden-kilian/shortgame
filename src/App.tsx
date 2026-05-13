@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { type IServiceContext, ServiceContext } from "./common/context/ServiceContext"
-import Game from "./screens/game"
+import Play from "./screens/play"
 import { GameService } from "./features/game/service/game_service";
 import { GameSessionService } from "./features/game_session/service/game_session_service";
 import { UserService } from "./features/user/service/user_service";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./common/components/Layout";
-import Home from "./screens/home";
-import Pregame from "./screens/pregame";
+import GameSelection from "./screens/game_selection";
+import PlayerSelection from "./screens/player_selection";
 
 function App() {
   const [serviceContext, setServiceContext] = useState<IServiceContext | undefined>(undefined);
@@ -48,9 +48,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home></Home>}></Route>
-            <Route path="player-selection/:gameId" element={<Pregame></Pregame>}></Route>
-            <Route path="play/:sessionId" element={<Game></Game>}></Route>
+            <Route index element={<GameSelection></GameSelection>}></Route>
+            <Route path="player-selection/:gameId" element={<PlayerSelection></PlayerSelection>}></Route>
+            <Route path="play/:sessionId" element={<Play></Play>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

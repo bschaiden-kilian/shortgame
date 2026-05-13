@@ -10,7 +10,7 @@ const ScoreLogger = (props: IScoreLogger) => {
 
     return (
         <div className='flex flex-col gap-5'>
-            <div className='w-full h-32 grid grid-cols-3 gap-1'>
+            <div className='w-full h-32 grid grid-cols-3 gap-2'>
                 {
                     Array.from(
                         { length: props.maxScore - props.minScore + 1 },

@@ -3,6 +3,7 @@ import { Subheading2 } from '../../../common/components/Text'
 import { GameService } from '../service/game_service'
 import type Game from '../data/game_model'
 import GameCard from './game_card';
+import { Link } from 'react-router-dom';
 
 const service = new GameService();
 
@@ -22,7 +23,7 @@ const GameCardList = () => {
 
         fetch();
     }, []);
-    
+
     return (
         <div className='h-full overflow-y-scroll'>
             <nav className='flex justify-between'>
@@ -30,9 +31,14 @@ const GameCardList = () => {
                 <Subheading2>Filter</Subheading2>
             </nav>
             <div className='h-full flex flex-col gap-2 py-4'>
-            {
-                games.map((e) =>  <GameCard game={e}></GameCard>)
-            }
+                {
+                    games.map((e) =>
+                        <Link to={"/player-selection/" + e.id}>
+                            <GameCard game={e}></GameCard>
+                        </Link>
+
+                    )
+                }
             </div>
         </div>
     )

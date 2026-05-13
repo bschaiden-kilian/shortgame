@@ -1,7 +1,7 @@
 import {Subheading1, Heading1, Body1} from '../common/components/Text';
 import GameCardList from '../features/game/presentation/game_card_list'
 
-const Home = () => {
+const GameSelection = () => {
     return (
         <div className='flex flex-col gap-10'>
             <div className="w-full flex flex-col gap-1.5">
@@ -14,4 +14,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default GameSelection
