@@ -1,33 +1,39 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Subheading2 } from '../../../common/components/Text';
-import { UserService } from '../service/user_service';
+import { ServiceContext } from '../../../common/context/ServiceContext';
 import type User from '../data/user_model';
 import UserCard from './user_card';
 import UserCardSelected from './user_card_selected';
 
 const MAX_PLAYERS = 4;
 
-const UserSelectionList = () => {
+interface IUserSelectionListProps {
+    onSelect: (selected: string[]) => void
+}
+
+const UserSelectionList = (props: IUserSelectionListProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
+  const service = useContext(ServiceContext);
+
   useEffect(() => {
-    const service = new UserService();
+    if (!service) return;
     let cancelled = false;
 
-    const fetch = async () => {
-      const u = await service.getUsers();
+    const poll = () => {
       if (cancelled) return;
+      const u = service.userService.getUsers();
       if (u.length === 0) {
-        setTimeout(fetch, 1000);
+        setTimeout(poll, 200);
         return;
       }
       setUsers(u);
     };
 
-    fetch();
+    poll();
     return () => { cancelled = true; };
-  }, []);
+  }, [service]);
 
   const handleUserClick = (user: User) => {
     setSelectedIds((prev) => {
@@ -40,6 +46,8 @@ const UserSelectionList = () => {
       return [...prev, user.id];
     });
   };
+
+  useEffect(() => {props.onSelect(selectedIds)}, [selectedIds])
 
   // Derived state — recomputed on every render, no sync issues
   const selectedUsers = selectedIds

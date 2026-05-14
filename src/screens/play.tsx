@@ -5,6 +5,8 @@ import ScoreLogger from '../features/game_session/presentation/score_logger';
 import { ServiceContext } from '../common/context/ServiceContext';
 import { useParams } from 'react-router-dom';
 import GameSession from '../features/game_session/data/game_session_model';
+import type User from '../features/user/data/user_model';
+import ScoreCard from '../features/game_session/presentation/score_card';
 
 const Play = () => {
     const { sessionId } = useParams()
@@ -12,6 +14,7 @@ const Play = () => {
     const [currentRound, setCurrentRound] = useState(1);
     const [session, setSession] = useState<GameSession>(new GameSession("demo", [""]));
     const [currentPlayer, setCurrentPlayer] = useState(0)
+    const [users, setUsers] = useState<User[]>([])
 
     useEffect(() => {
         console.log("Effect ran. service:", !!service, "sessionId:", sessionId);
@@ -26,6 +29,19 @@ const Play = () => {
             }
         }
     }, [sessionId, service])
+
+    useEffect(() => {
+        if (!service) return;
+        const poll = () => {
+            const u = service.userService.getUsers();
+            if (u.length === 0) {
+                setTimeout(poll, 200);
+                return;
+            }
+            setUsers(u);
+        };
+        poll();
+    }, [service])
 
     const handleScore = (score: number) => {
         service?.gameSessionService.logScore(session.id, session.playerIds[currentPlayer], currentRound, score)
@@ -62,8 +78,9 @@ const Play = () => {
         return score;
     }
 
+    const currentUser = users.find(u => u.id === session.playerIds[currentPlayer]);
     console.log("Render. currentPlayer:", currentPlayer, "session.id:", session.id);
-    console.log("User lookup for", currentPlayer, ":", service?.userService.getUserById(session.playerIds[currentPlayer]));
+    console.log("User lookup for", currentPlayer, ":", currentUser);
     return (
         <div className='h-full flex flex-col gap-5'>
             <div className='w-full h-fit flex gap-1 items-end justify-between'>
@@ -88,10 +105,9 @@ const Play = () => {
                 <Card>
                     <div className='w-full h-full flex justify-between items-center'>
                         <div className='flex justify-center items-center gap-2'>
-                            <span className='w-8 h-8 bg-emerald-500 text-mist-950 rounded-full font-mono font-bold flex justify-center items-center'>1</span>
                             <div>
                                 <Subheading2>Now Playing</Subheading2>
-                                <Heading3>{service?.userService.getUserById(session.playerIds[currentPlayer])?.name || "default"}</Heading3>
+                                <Heading3>{currentUser?.name ?? "—"}</Heading3>
                             </div>
                         </div>
                         <div>
@@ -102,6 +118,7 @@ const Play = () => {
                 </Card>
             </div>
             <ScoreLogger minScore={1} maxScore={6} addScore={(score) => handleScore(score)}></ScoreLogger>
+            <ScoreCard gameSessionId={session} currentPlayerId={session.playerIds[currentPlayer]} />
         </div>
     )
 }

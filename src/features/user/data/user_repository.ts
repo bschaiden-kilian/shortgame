@@ -9,14 +9,13 @@ export interface IUserRepository {
 export class MockUserRepository implements IUserRepository {
 
     private mockUsers: User[] = [];
+    private users = ["Kilian", "Marco","Jan","Ferdinand"];
 
     constructor() {
-        let seed = new User("Kilian");
-        seed.id = "user1";
-        this.mockUsers.push(seed);
-        seed = new User("Marco");
-        seed.id = "user2";
-        this.mockUsers.push(seed);
+        this.users.forEach((name) => {
+            let user = new User(name);
+            this.mockUsers.push(user);
+        });
     }
 
     getUserById(id: string): Promise<User> {

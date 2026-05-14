@@ -10,8 +10,8 @@ const GameCard = (props : IGameCardProps) => {
   return (
     <Card>
       <div className="flex gap-1">
-        {props.game.tags.map((e) => 
-            <div className="bg-mist-800 rounded-full px-3 py-1">
+        {props.game.tags.map((e) =>
+            <div key={e} className="bg-mist-800 rounded-full px-3 py-1">
               <Subheading2>{e}</Subheading2>
             </div>
         )} 

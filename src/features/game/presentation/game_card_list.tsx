@@ -33,7 +33,7 @@ const GameCardList = () => {
             <div className='h-full flex flex-col gap-2 py-4'>
                 {
                     games.map((e) =>
-                        <Link to={"/player-selection/" + e.id}>
+                        <Link key={e.id} to={"/player-selection/" + e.id}>
                             <GameCard game={e}></GameCard>
                         </Link>
 

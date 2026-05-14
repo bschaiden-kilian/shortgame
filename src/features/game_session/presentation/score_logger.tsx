@@ -9,14 +9,17 @@ interface IScoreLogger {
 const ScoreLogger = (props: IScoreLogger) => {
 
     return (
-        <div className='flex flex-col gap-5'>
+        <div className='flex flex-col gap-2'>
             <div className='w-full h-32 grid grid-cols-3 gap-2'>
                 {
                     Array.from(
-                        { length: props.maxScore - props.minScore + 1 },
+                        { length: props.maxScore - props.minScore + 1},
                         (_, i) => i + props.minScore
                     ).map((v) => <ButtonGrey key={v} onClick={() => props.addScore(v)}>{v}</ButtonGrey>)
                 }
+            </div>
+            <div className='w-full h-16'>
+                <ButtonGrey onClick={() => props.addScore(0)}>No Score</ButtonGrey>
             </div>
         </div>
     )

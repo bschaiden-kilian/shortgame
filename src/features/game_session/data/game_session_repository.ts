@@ -4,6 +4,7 @@ import GameSession from "./game_session_model";
 export interface IGameSessionRepository {
     getGameSessionById(id: string): Promise<GameSession>
     getGameSessions(): Promise<GameSession[]>
+    createGameSession(gameSession: GameSession): Promise<void>
     updateGameSession(gameSession: GameSession): Promise<void>
 }
 
@@ -22,6 +23,10 @@ export class MockGameSessionRepository implements IGameSessionRepository {
     }
     getGameSessions(): Promise<GameSession[]> {
         return Promise.resolve(this.mockGameSessions);
+    }
+    createGameSession(gameSession: GameSession): Promise<void> {
+        this.mockGameSessions.push(gameSession);
+        return Promise.resolve();
     }
     updateGameSession(gameSession: GameSession): Promise<void> {
         const index = this.mockGameSessions.findIndex(gs => gs.id === gameSession.id);

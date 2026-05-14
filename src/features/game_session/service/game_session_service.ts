@@ -18,7 +18,7 @@ export class GameSessionService {
     createGameSession(gameId: string, playerIds: string[]): void {
         const newSession = new GameSession(gameId, playerIds);
         this.gameSessions.push(newSession);
-        this.sessionRepository.updateGameSession(newSession).catch(error => console.error("Failed to create game session:", error));
+        this.sessionRepository.createGameSession(newSession).catch(error => console.error("Failed to create game session:", error));
     }
 
     getGameSessionById(id: string): GameSession {
