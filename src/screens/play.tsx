@@ -82,7 +82,7 @@ const Play = () => {
     console.log("Render. currentPlayer:", currentPlayer, "session.id:", session.id);
     console.log("User lookup for", currentPlayer, ":", currentUser);
     return (
-        <div className='h-full flex flex-col gap-5'>
+        <div className='h-full flex flex-col gap-5 overflow-y-auto'>
             <div className='w-full h-fit flex gap-1 items-end justify-between'>
                 <div className='w-full h-fit flex gap-1 items-end'>
                     <div className='flex flex-col gap-1.5'>
