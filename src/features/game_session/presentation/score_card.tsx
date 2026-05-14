@@ -62,7 +62,7 @@ const ScoreCard = ({ gameSessionId, currentPlayerId }: IScoreCardProps) => {
     };
 
     return (
-        <div className="w-full bg-mist-900 border border-mist-800 rounded-xl overflow-hidden">
+        <div className="w-full bg-mist-900 border border-mist-800 rounded-xl">
             <table className="w-full">
                 <thead>
                     <tr className="border-b border-mist-800">
