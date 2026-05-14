@@ -4,7 +4,7 @@ import type Game from '../../game/data/game_model';
 import type GameSession from '../data/game_session_model';
 import type User from '../../user/data/user_model';
 import type Score from '../data/score_model';
-import { Body1, Body2, Heading3, Subheading1, Subheading2 } from '../../../common/components/Text';
+import { Body2 } from '../../../common/components/Text';
 
 interface IScoreCardProps {
     gameSessionId: GameSession;
