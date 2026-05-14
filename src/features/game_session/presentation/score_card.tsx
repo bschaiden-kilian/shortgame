@@ -66,7 +66,7 @@ const ScoreCard = ({ gameSessionId, currentPlayerId }: IScoreCardProps) => {
             <table className="w-full">
                 <thead>
                     <tr className="border-b border-mist-800">
-                        <th className="text-left px-4 py-2 text-gray-500 font-mono text-[10px] font-light tracking-widest uppercase w-1/3">Player</th>
+                        <th className="text-left px-4 py-2 text-gray-500 font-mono text-[10px] font-light tracking-widest uppercase">Player</th>
                         {rounds.map(r => (
                             <th key={r} className="text-center px-1 py-2 text-gray-500 font-mono text-[10px] font-light tracking-widest uppercase">R{r}</th>
                         ))}
