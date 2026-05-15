@@ -3,11 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ServiceContext } from '../common/context/ServiceContext';
 import Card from '../common/components/Card';
 import { Button } from '../common/components/Button';
-import { Heading1, Heading2, Heading3, Subheading1, Subheading2 } from '../common/components/Text';
+import { Heading3, Subheading1, Subheading2 } from '../common/components/Text';
 import ScoreCard from '../features/game_session/presentation/score_card';
 import GameSession from '../features/game_session/data/game_session_model';
 import type User from '../features/user/data/user_model';
-import type UserCardSelected from '../features/user/presentation/user_card_selected';
 
 const Leaderboard = () => {
     const { sessionId } = useParams();
@@ -15,7 +14,6 @@ const Leaderboard = () => {
     const navigate = useNavigate();
 
     const [session, setSession] = useState<GameSession | undefined>(undefined);
-    const [players, setPlayers] = useState<User[]>([]);
     const [scores, setScores] = useState<{ user: User; total: number }[]>([]);
 
     useEffect(() => {
@@ -46,7 +44,6 @@ const Leaderboard = () => {
                 })).sort((a, b) => (service.gameService.getGameById(fetchedSession.gameId)?.lowestWins) ? a.total - b.total : b.total - a.total);
 
                 setSession(fetchedSession);
-                setPlayers(sessionPlayers);
                 setScores(totals);
             }
         };

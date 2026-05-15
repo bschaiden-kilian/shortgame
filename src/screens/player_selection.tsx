@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '../common/components/Button';
-import { Subheading1, Heading2, Body2 } from '../common/components/Text';
 import { ServiceContext } from '../common/context/ServiceContext';
 import UserSelectionList from '../features/user/presentation/user_selection_list';
 import type Game from '../features/game/data/game_model';
