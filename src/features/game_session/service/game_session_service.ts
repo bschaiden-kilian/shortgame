@@ -49,6 +49,16 @@ export class GameSessionService {
         console.log("Same array reference?", this.scores === (this.scoreRepository as any).mockScores);
     }
 
+    removeScore(gameSessionId: string, playerId: string, roundNumber: number): void {
+        const idx = this.scores.findIndex(
+            s => s.gameSessionId === gameSessionId && s.playerId === playerId && s.roundNumber === roundNumber
+        );
+        if (idx !== -1) {
+            const [removed] = this.scores.splice(idx, 1);
+            this.scoreRepository.deleteScore(removed.id).catch(error => console.error("Failed to delete score:", error));
+        }
+    }
+
     updateGameSession(gameSession: GameSession): void {
         const index = this.gameSessions.findIndex(gs => gs.id === gameSession.id);
         if (index !== -1) {

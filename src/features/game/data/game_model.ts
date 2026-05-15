@@ -5,9 +5,11 @@ export default class Game {
     public scoreMin: number;
     public scoreMax: number;
     public description: string;
+    public lowestWins : boolean;
+    public scoreUnit : string;
     public tags: string[]
 
-    constructor(name: string, description: string, tags: string[], rounds: number, scoreMin: number, scoreMax: number) {
+    constructor(name: string, description: string, tags: string[], rounds: number, scoreMin: number, scoreMax: number, lowestWins: boolean, scoreUnit: string) {
         this.id = crypto.randomUUID();
         this.name = name;
         this.rounds = rounds;
@@ -15,5 +17,7 @@ export default class Game {
         this.scoreMax = scoreMax;
         this.description = description;
         this.tags = tags;
+        this.lowestWins = lowestWins;
+        this.scoreUnit = scoreUnit;
     }
 }

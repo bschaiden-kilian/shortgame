@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./common/components/Layout";
 import GameSelection from "./screens/game_selection";
 import PlayerSelection from "./screens/player_selection";
+import Leaderboard from "./screens/leaderboard";
+import GameLayout from "./common/components/GameLayout";
 
 function App() {
   const [serviceContext, setServiceContext] = useState<IServiceContext | undefined>(undefined);
@@ -49,8 +51,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<GameSelection></GameSelection>}></Route>
-            <Route path="player-selection/:gameId" element={<PlayerSelection></PlayerSelection>}></Route>
-            <Route path="play/:sessionId" element={<Play></Play>}></Route>
+            <Route path="/:gameId" element={<GameLayout></GameLayout>}>
+              <Route path="player-selection" element={<PlayerSelection></PlayerSelection>}></Route>
+              <Route path="play/:sessionId" element={<Play></Play>}></Route>
+              <Route path="leaderboard/:sessionId" element={<Leaderboard />}></Route>
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

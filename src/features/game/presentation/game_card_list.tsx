@@ -1,28 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Subheading2 } from '../../../common/components/Text'
-import { GameService } from '../service/game_service'
 import type Game from '../data/game_model'
 import GameCard from './game_card';
 import { Link } from 'react-router-dom';
-
-const service = new GameService();
+import { ServiceContext } from '../../../common/context/ServiceContext';
 
 const GameCardList = () => {
+    const service = useContext(ServiceContext);
     const [games, setGames] = useState<Game[]>([]);
 
     useEffect(() => {
-        const fetch = async () => {
-            const g = await service.getGames();
+        if (!service) return;
+        const poll = () => {
+            const g = service.gameService.getGames();
+            if (g.length === 0) { setTimeout(poll, 100); return; }
             setGames(g);
-
-            if (g.length === 0)
-                setTimeout(() => {
-                    fetch();
-                }, 1000);
         };
-
-        fetch();
-    }, []);
+        poll();
+    }, [service]);
 
     return (
         <div className='h-full overflow-y-scroll'>
@@ -33,7 +28,7 @@ const GameCardList = () => {
             <div className='h-full flex flex-col gap-2 py-4'>
                 {
                     games.map((e) =>
-                        <Link key={e.id} to={"/player-selection/" + e.id}>
+                        <Link key={e.id} to={e.id+"/player-selection"}>
                             <GameCard game={e}></GameCard>
                         </Link>
 

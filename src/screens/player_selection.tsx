@@ -20,7 +20,7 @@ const PlayerSelection = () => {
             const sessions = service.gameSessionService.getGameSessions();
             const newSession = sessions[sessions.length - 1];
             
-            navigate(`/play/${newSession.id}`);
+            navigate(`/${game.id}/play/${newSession.id}`);
         }
     };
 
@@ -37,16 +37,9 @@ const PlayerSelection = () => {
 
     return (
         <div className='h-full flex flex-col gap-10'>
-            <div className="w-full shrink flex flex-col gap-1.5">
-                <Subheading1>Game</Subheading1>
-                <Heading2>{game?.name}</Heading2>
-                <Body2>
-                    {game?.description}
-                </Body2>
-            </div>
             <UserSelectionList onSelect={(users) => setPlayerIds(users)}></UserSelectionList>
             <div className='h-12 w-full shrink'>
-                <Button onClick={() => handleStart()}>Start Game</Button>
+                <Button onClick={() => handleStart()} disabled={playerIds.length <= 0}>Start Game</Button>
             </div>
         </div>
     )
