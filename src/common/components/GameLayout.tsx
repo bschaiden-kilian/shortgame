@@ -1,13 +1,11 @@
-import { Outlet, useNavigate, useParams } from 'react-router-dom'
-import { Subheading1, Heading2, Body2 } from './Text'
+import { Outlet, useParams } from 'react-router-dom'
+import {  Heading2, Body2 } from './Text'
 import { useContext, useState, useEffect } from 'react';
 import type Game from '../../features/game/data/game_model';
 import { ServiceContext } from '../context/ServiceContext';
-import { IoIosArrowDropleft } from 'react-icons/io';
 
 const GameLayout = () => {
     const { gameId } = useParams();
-    const navigate = useNavigate();
     const service = useContext(ServiceContext);
     const [game, setGame] = useState<Game | undefined>(undefined)
 
