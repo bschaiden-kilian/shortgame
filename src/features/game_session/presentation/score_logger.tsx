@@ -19,13 +19,9 @@ const ScoreLogger = (props: IScoreLogger) => {
                     ).map((v) => <ButtonGrey disabled={props.gameComplete} key={v} onClick={() => props.addScore(v)}>{v}</ButtonGrey>)
                 }
             </div>
-            {
-                props.minScore === 0 ?
-                    <div className='w-full h-16'>
-                        <ButtonGrey disabled={props.gameComplete} onClick={() => props.addScore(0)}>No Score</ButtonGrey>
-                    </div>
-                    : ""
-            }
+            <div className='w-full h-16'>
+                <ButtonGrey disabled={props.gameComplete} onClick={() => props.addScore(0)}>No Score</ButtonGrey>
+            </div>
         </div>
     )
 }

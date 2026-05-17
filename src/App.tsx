@@ -10,6 +10,7 @@ import GameSelection from "./screens/game_selection";
 import PlayerSelection from "./screens/player_selection";
 import Leaderboard from "./screens/leaderboard";
 import GameLayout from "./common/components/GameLayout";
+import History from "./screens/history";
 
 function App() {
   const [serviceContext, setServiceContext] = useState<IServiceContext | undefined>(undefined);
@@ -56,6 +57,8 @@ function App() {
               <Route path="play/:sessionId" element={<Play></Play>}></Route>
               <Route path="leaderboard/:sessionId" element={<Leaderboard />}></Route>
             </Route>
+            <Route path="/history" element={<History></History>}></Route>
+            <Route path="/history/:sessionId" element={<Leaderboard></Leaderboard>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

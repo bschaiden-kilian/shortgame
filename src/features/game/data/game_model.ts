@@ -20,4 +20,33 @@ export default class Game {
         this.lowestWins = lowestWins;
         this.scoreUnit = scoreUnit;
     }
+
+    toJSON(): object {
+        return {
+            id: this.id,
+            name: this.name,
+            rounds: this.rounds,
+            scoreMin: this.scoreMin,
+            scoreMax: this.scoreMax,
+            description: this.description,
+            lowestWins: this.lowestWins,
+            scoreUnit: this.scoreUnit,
+            tags: this.tags,
+        };
+    }
+
+    static fromJSON(json: Record<string, unknown>): Game {
+        const game = new Game(
+            json.name as string,
+            json.description as string,
+            json.tags as string[],
+            json.rounds as number,
+            json.scoreMin as number,
+            json.scoreMax as number,
+            json.lowestWins as boolean,
+            json.scoreUnit as string,
+        );
+        game.id = json.id as string;
+        return game;
+    }
 }

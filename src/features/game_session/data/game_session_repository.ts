@@ -11,12 +11,6 @@ export interface IGameSessionRepository {
 export class MockGameSessionRepository implements IGameSessionRepository {
     private mockGameSessions: GameSession[] = [];
 
-    constructor() {
-        let seed = new GameSession("game1", ["user1", "user2"]);
-        seed.id = "gameSession1";
-        this.mockGameSessions.push(seed);
-    }
-
     getGameSessionById(id: string): Promise<GameSession> {
         const found = this.mockGameSessions.find(gameSession => gameSession.id === id);
         return found ? Promise.resolve(found) : Promise.reject(new Error("Game session not found"));
